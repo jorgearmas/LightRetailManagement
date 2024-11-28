@@ -1,6 +1,7 @@
 from proveedor import Proveedor
 from producto import Producto
 from data import insert_producto, read_producto
+from carga import *
 
 print("-- LIGHT RETAIL MANAGEMENT --")
 primera_ejecucion = int(input("Es esta la primera ejecucion (1 > Si / 2 > No)? "))
@@ -11,8 +12,8 @@ while primera_ejecucion == 1:
     
     print("-- Ingrese proveedor del producto --")
     nombre_proveedor = input("Proveedor: ")
-    telefono_proveedor= input("Número: ")
-    proveedor = Proveedor(nombre_proveedor, telefono_proveedor)
+    proveedor = Proveedor(nombre_proveedor)
+    
     productos = []
 
     while continuar == 1:
@@ -38,12 +39,8 @@ while primera_ejecucion == 1:
     insert_producto(productos)
     primera_ejecucion = 2
 
-print("1. Cargar inventario")
-productos = read_producto()
-for registro in productos:
-    for key, value in registro.items():
-        print(key)
-        print(value)
-    
-print("2. Descargar inventario")
+print("1. Cargar inventario proveedor existente")
+exec_carga_existente()
+print("2. Cargar inventario proveedor nuevo")
+print("3. Descargar inventario")
 
