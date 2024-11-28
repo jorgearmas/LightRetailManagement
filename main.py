@@ -1,6 +1,6 @@
 from proveedor import Proveedor
 from producto import Producto
-from data import insert_producto, update_producto
+from data import insert_producto, read_producto
 
 print("-- LIGHT RETAIL MANAGEMENT --")
 primera_ejecucion = int(input("Es esta la primera ejecucion (1 > Si / 2 > No)? "))
@@ -32,11 +32,18 @@ while primera_ejecucion == 1:
             'precio_salida': producto.precio_salida, 
             'proveedor': producto.proveedor.nombre})
 
-        #print(productos)
+        print(productos)
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
     insert_producto(productos)
     primera_ejecucion = 2
 
-
+print("1. Cargar inventario")
+productos = read_producto()
+for registro in productos:
+    for key, value in registro.items():
+        print(key)
+        print(value)
+    
+print("2. Descargar inventario")
 
