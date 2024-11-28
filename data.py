@@ -10,4 +10,4 @@ def insert_producto(productos):
         producto_writer.writeheader()
 
         for fila in productos:
-            producto_writer.writerow(fila) 
+            producto_writer.writerow(fila)
