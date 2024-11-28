@@ -16,11 +16,12 @@ class Producto:
     
     def __repr__(self) :
         return f"""
+        ID: {self.id}
         Nombre: {self.nombre}
         Cantidad: {self.cantidad}
         Precio entrada: {self.precio_entrada }
         Precio salida: {self.precio_salida}
-        Proveedor: {self.proveedor.nombre} """
+        {self.proveedor.nombre}"""
 
     
 
