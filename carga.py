@@ -2,28 +2,10 @@ from data import insert_producto, read_producto
 from proveedor import Proveedor
 from producto import Producto
 
-def exec_carga_existente():
-    productos = read_producto()
-    proveedores = []
+productos = read_producto()
 
-    #extraer proveedores del diccionario 'productos'
-    for registro in productos:
-        for key, value in registro.items():
-            if key == 'proveedor':
-                if value in proveedores:
-                    continue
-                else:
-                    proveedores.append(value)
+def instanciar_productos(productos):
 
-    #seleccionar proveedor
-    print("Seleccione el proveedor: ")
-    for i in range(len(proveedores)):
-        print(str(i)+" - "+proveedores[i])
-
-    proveedor_index = int(input("Opción: "))
-    proveedor_value = proveedores[proveedor_index]
-    proveedor = Proveedor(proveedor_value)
-    
     #globales para hacer instancias de 'Producto' con data del dict 'productos'
     nombre_producto = ""
     cantidad = 0
@@ -45,11 +27,35 @@ def exec_carga_existente():
             elif key == 'proveedor':
                 prov = Proveedor(value)
 
-            producto = Producto(nombre_producto, cantidad, precio_entrada, precio_salida, prov)
-        
-    #Agregar nuevos productos
-    continuar = 1
+            Producto(nombre_producto, cantidad, precio_entrada, precio_salida, prov)
+    
 
+def exec_carga_existente():
+    continuar = 1
+    proveedores = []
+
+    #instanciar 'Producto' con productos del diccionario 'productos'
+    instanciar_productos(productos)
+
+    #extraer proveedores del diccionario 'productos'
+    for registro in productos:
+        for key, value in registro.items():
+            if key == 'proveedor':
+                if value in proveedores:
+                    continue
+                else:
+                    proveedores.append(value)
+
+    #seleccionar proveedor
+    print("Seleccione el proveedor: ")
+    for i in range(len(proveedores)):
+        print(str(i)+" - "+proveedores[i])
+
+    proveedor_index = int(input("Opción: "))
+    proveedor_value = proveedores[proveedor_index]
+    proveedor = Proveedor(proveedor_value)
+    
+    # 1. instanciar 'Producto' con nuevos valores 2. agregar dict a lista de productos
     while continuar == 1:
         
         print("-- Ingrese datos del producto --")
@@ -67,7 +73,10 @@ def exec_carga_existente():
             'precio_salida': producto.precio_salida, 
             'proveedor': producto.proveedor.nombre})
 
-        print(productos)
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
+    #escribir lista en el archivo
     insert_producto(productos)
+
+def exec_carga_stock():
+    pass
