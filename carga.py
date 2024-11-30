@@ -29,7 +29,6 @@ def instanciar_productos(productos):
 
             Producto(nombre_producto, cantidad, precio_entrada, precio_salida, prov)
     
-
 def exec_carga_existente():
 
     continuar = 1
