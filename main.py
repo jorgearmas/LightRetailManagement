@@ -2,6 +2,7 @@ from proveedor import Proveedor
 from producto import Producto
 from data import insert_producto, read_producto
 from carga import *
+from descarga import *
 
 print("-- LIGHT RETAIL MANAGEMENT --")
 primera_ejecucion = int(input("Es esta la primera ejecucion (1 > Si / 2 > No)? "))
@@ -53,3 +54,6 @@ elif opcion_menu == 2:
     exec_carga_stock()
 elif opcion_menu == 3:
     exec_carga_no_existente()
+elif opcion_menu == 4:
+    exec_descarga()
+    
