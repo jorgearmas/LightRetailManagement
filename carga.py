@@ -34,7 +34,7 @@ def exec_carga_existente():
     continuar = 1
     proveedores = []
 
-    #instanciar 'Producto' con productos del diccionario 'productos'
+    #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
 
     #extraer proveedores del diccionario 'productos'
@@ -79,4 +79,7 @@ def exec_carga_existente():
     insert_producto(productos)
 
 def exec_carga_stock():
-    pass
+
+    #instanciar 'Producto' con productos existentes del diccionario 'productos'
+    instanciar_productos(productos)
+    print(productos)
