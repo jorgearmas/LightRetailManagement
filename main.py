@@ -33,16 +33,23 @@ while primera_ejecucion == 1:
             'precio_salida': producto.precio_salida, 
             'proveedor': producto.proveedor.nombre})
 
-        print(productos)
+        #print(productos)
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
     insert_producto(productos)
     primera_ejecucion = 2
 
-print("1. Cargar inventario proveedor existente")
-#exec_carga_existente()
-print("2. Cargar inventario - solo stock")
-exec_carga_stock()
-print("2. Cargar inventario proveedor nuevo")
-print("3. Descargar inventario")
+opcion_menu = 0
 
+print("1. Cargar inventario proveedor existente")
+print("2. Cargar inventario - solo stock")
+print("3. Cargar inventario proveedor nuevo")
+print("4. Descargar inventario")
+opcion_menu = int(input("Ingrese opcion: "))
+
+if opcion_menu == 1:
+    exec_carga_existente()
+elif opcion_menu == 2:
+    exec_carga_stock()
+elif opcion_menu == 3:
+    exec_carga_no_existente()
