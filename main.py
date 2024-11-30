@@ -40,7 +40,9 @@ while primera_ejecucion == 1:
     primera_ejecucion = 2
 
 print("1. Cargar inventario proveedor existente")
-exec_carga_existente()
+#exec_carga_existente()
+print("2. Cargar inventario - solo stock")
+exec_carga_stock()
 print("2. Cargar inventario proveedor nuevo")
 print("3. Descargar inventario")
 
