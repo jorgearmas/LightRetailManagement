@@ -31,6 +31,7 @@ def instanciar_productos(productos):
     
 
 def exec_carga_existente():
+
     continuar = 1
     proveedores = []
 
@@ -82,4 +83,19 @@ def exec_carga_stock():
 
     #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
-    print(productos)
+
+    id_to_search = input("- Ingrese ID a buscar: ")
+
+    for registro in productos:
+        for key, value in registro.items():
+            if key == 'id' and value == id_to_search:
+                
+                cantidad_ingresada = int(input("- Numero de items a agregar: "))
+                nueva_cantidad = int(registro['cantidad']) + cantidad_ingresada
+                print(str(nueva_cantidad))
+                registro['cantidad'] = str(nueva_cantidad)
+    
+    insert_producto(productos)
+            
+        
+
