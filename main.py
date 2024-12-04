@@ -1,21 +1,29 @@
 from proveedor import Proveedor
 from producto import Producto
-from data import insert_producto, read_producto
-from carga import *
+from data import insert_producto, insert_proveedor
+from carga import exec_carga_existente, exec_carga_no_existente, exec_carga_stock
+
 from descarga import *
 
 print("-- LIGHT RETAIL MANAGEMENT --")
 primera_ejecucion = int(input("Es esta la primera ejecucion (1 > Si / 2 > No)? "))
 
 while primera_ejecucion == 1:
-
+    proveedores = []
+    productos = []
     continuar = 1
     
-    print("-- Ingrese proveedor del producto --")
-    nombre_proveedor = input("Proveedor: ")
-    proveedor = Proveedor(nombre_proveedor)
+    print("-- Ingrese datos del proveedor del producto --")
+    nombre_proveedor = input("Nombre: ")
+    numero_proveedor = input("Teléfono: ")
+    proveedor = Proveedor(nombre_proveedor, numero_proveedor)
     
-    productos = []
+    proveedores.append({
+        'id': proveedor.id,
+        'nombre': proveedor.nombre,
+        'numero': proveedor.numero})
+    
+    insert_proveedor(proveedores)
 
     while continuar == 1:
         
@@ -34,7 +42,6 @@ while primera_ejecucion == 1:
             'precio_salida': producto.precio_salida, 
             'proveedor': producto.proveedor.nombre})
 
-        #print(productos)
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
     insert_producto(productos)
