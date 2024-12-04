@@ -2,7 +2,10 @@ from data import insert_producto, read_producto
 from proveedor import Proveedor
 from producto import Producto
 
-productos = read_producto()
+try:
+    productos = read_producto()
+except FileNotFoundError:
+    print("Proceso archivo inicial stock")
 
 def instanciar_productos(productos):
 
