@@ -2,5 +2,3 @@ id,nombre,cantidad,precio_entrada,precio_salida,proveedor
 1,Bucky,200,80,150,LUCAZA
 2,Luxy,100,800,1300,LUCAZA
 3,Maxi,500,26,150,LUCAZA
-19,Bendix,100,150,200,DIN
-20,Balin,78,900,1900,DIN
