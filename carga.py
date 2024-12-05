@@ -1,14 +1,9 @@
-from data import insert_producto, read_producto, read_proveedor
+from data import insert_producto, read_producto, insert_proveedor
 from proveedor import Proveedor
 from producto import Producto
 
 try:
     productos = read_producto()
-except FileNotFoundError:
-    print("Proceso archivo inicial stock")
-
-try:
-    proveedores = read_proveedor()
 except FileNotFoundError:
     print("Proceso archivo inicial stock")
 
@@ -33,17 +28,14 @@ def instanciar_productos(productos):
             elif key == 'precio_salida':
                 precio_salida = value
             elif key == 'proveedor':
-                for r in proveedores:
-                    for k, v in r.items():
-                        if k == 'nombre':
-                            prov = Proveedor(r['nombre'], r['numero'])
+                prov = value
 
             Producto(nombre_producto, cantidad, precio_entrada, precio_salida, prov)
     
 def exec_carga_existente():
 
     continuar = 1
-    proveedores2 = []
+    proveedores = []
 
     #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
@@ -52,24 +44,18 @@ def exec_carga_existente():
     for registro in productos:
         for key, value in registro.items():
             if key == 'proveedor':
-                if value in proveedores2:
+                if value in proveedores:
                     continue
                 else:
-                    proveedores2.append(value)
+                    proveedores.append(value)
 
     #seleccionar proveedor
     print("Seleccione el proveedor: ")
-    for i in range(len(proveedores2)):
-        print(str(i)+" - "+proveedores2[i])
+    for i in range(len(proveedores)):
+        print(str(i)+" - "+proveedores[i])
 
     proveedor_index = int(input("Opción: "))
-    proveedor_value = proveedores2[proveedor_index]
-    num = 0
-    for r in proveedores:
-        for k, v in r.items():
-            if k == 'numero':
-               num = v
-    proveedor = Proveedor(proveedor_value, num)
+    proveedor_value = proveedores[proveedor_index]
     
     # 1. instanciar 'Producto' con nuevos valores 2. agregar dict a lista de productos
     while continuar == 1:
@@ -80,14 +66,14 @@ def exec_carga_existente():
         precio_entrada = input("Precio de compra: ")
         precio_salida = input("Precio de venta: ")
 
-        producto = Producto(nombre_producto, cantidad, precio_entrada, precio_salida, proveedor)
+        producto = Producto(nombre_producto, cantidad, precio_entrada, precio_salida, proveedor_value)
         productos.append({
             'id': producto.id, 
             'nombre': producto.nombre, 
             'cantidad': producto.cantidad, 
             'precio_entrada': producto.precio_entrada, 
             'precio_salida': producto.precio_salida, 
-            'proveedor': producto.proveedor.nombre})
+            'proveedor': producto.proveedor})
 
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
@@ -121,11 +107,20 @@ def exec_carga_no_existente():
     #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
 
+    proveedores = []
     continuar = 1
     
     print("-- Ingrese proveedor del producto --")
-    nombre_proveedor = input("Proveedor: ")
-    proveedor = Proveedor(nombre_proveedor)
+    nombre_proveedor = input("Nombre: ")
+    numero_proveedor = input("Teléfono: ")
+    proveedor = Proveedor(nombre_proveedor, numero_proveedor)
+
+    proveedores.append({
+        'id': proveedor.id,
+        'nombre': proveedor.nombre,
+        'numero': proveedor.numero})
+    
+    insert_proveedor(proveedores)
 
     while continuar == 1:
         
@@ -135,16 +130,15 @@ def exec_carga_no_existente():
         precio_entrada = input("Precio de compra: ")
         precio_salida = input("Precio de venta: ")
 
-        producto = Producto(nombre_producto, cantidad, precio_entrada, precio_salida, proveedor)
+        producto = Producto(nombre_producto, cantidad, precio_entrada, precio_salida, proveedor.nombre)
         productos.append({
             'id': producto.id, 
             'nombre': producto.nombre, 
             'cantidad': producto.cantidad, 
             'precio_entrada': producto.precio_entrada, 
             'precio_salida': producto.precio_salida, 
-            'proveedor': producto.proveedor.nombre})
+            'proveedor': proveedor.nombre})
 
-        #print(productos)
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
     insert_producto(productos)
