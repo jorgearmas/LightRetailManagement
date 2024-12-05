@@ -1,9 +1,14 @@
-from data import insert_producto, read_producto, insert_proveedor
+from data import insert_producto, read_producto, insert_proveedor, read_proveedor
 from proveedor import Proveedor
 from producto import Producto
 
 try:
     productos = read_producto()
+except FileNotFoundError:
+    print("Proceso archivo inicial stock")
+
+try:
+    proveedores = read_proveedor()
 except FileNotFoundError:
     print("Proceso archivo inicial stock")
 
@@ -31,7 +36,21 @@ def instanciar_productos(productos):
                 prov = value
 
             Producto(nombre_producto, cantidad, precio_entrada, precio_salida, prov)
+
+def instanciar_proveedores(proveedores):
+    print(proveedores)
+    nombre = ""
+    numero = ""
     
+    for registro in proveedores:
+        for key, value in registro.items():
+            if key == 'nombre':
+                nombre = value
+            elif key == 'numero':
+                numero = value
+            
+            Proveedor(nombre, numero)
+
 def exec_carga_existente():
 
     continuar = 1
@@ -94,20 +113,22 @@ def exec_carga_stock():
     for registro in productos:
         for key, value in registro.items():
             if key == 'id' and value == id_to_search:
-                
+                print(f"Invetario actuaal de {registro['nombre']} -> {registro['cantidad']}")
                 cantidad_ingresada = int(input("- Numero de items a agregar: "))
                 nueva_cantidad = int(registro['cantidad']) + cantidad_ingresada
-                print(str(nueva_cantidad))
+                print(f"Nuevo invetario de {registro['nombre']} -> "+str(nueva_cantidad))
                 registro['cantidad'] = str(nueva_cantidad)
     
     insert_producto(productos)
             
 def exec_carga_no_existente():
-
+    print(proveedores)
     #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
+    #instanciar 'Proveedores' con proveedores existentes del diccionario 'proveedores'
+    instanciar_proveedores(proveedores)
 
-    proveedores = []
+    #proveedores = []
     continuar = 1
     
     print("-- Ingrese proveedor del producto --")
