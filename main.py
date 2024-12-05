@@ -25,8 +25,7 @@ while primera_ejecucion == 1:
     
     insert_proveedor(proveedores)
 
-    while continuar == 1:
-        
+    while continuar == 1:  
         print("-- Ingrese datos del producto --")
         nombre_producto = input("Nombre: ")
         cantidad = input("Cantidad: ")
@@ -45,7 +44,7 @@ while primera_ejecucion == 1:
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
     insert_producto(productos)
-    primera_ejecucion = 2
+    primera_ejecucion = int(input("Desea agregar otro producto de otro proveedor (1 > Si / 2 > No)? "))
 
 opcion_menu = 0
 
