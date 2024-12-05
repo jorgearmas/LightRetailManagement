@@ -1,4 +1,4 @@
-from data import insert_producto, read_producto
+from data import insert_producto, read_producto, read_proveedor
 from proveedor import Proveedor
 from producto import Producto
 
@@ -7,8 +7,13 @@ try:
 except FileNotFoundError:
     print("Proceso archivo inicial stock")
 
-def instanciar_productos(productos):
+try:
+    proveedores = read_proveedor()
+except FileNotFoundError:
+    print("Proceso archivo inicial stock")
 
+def instanciar_productos(productos):
+    
     #globales para hacer instancias de 'Producto' con data del dict 'productos'
     nombre_producto = ""
     cantidad = 0
@@ -28,14 +33,17 @@ def instanciar_productos(productos):
             elif key == 'precio_salida':
                 precio_salida = value
             elif key == 'proveedor':
-                prov = Proveedor(value)
+                for r in proveedores:
+                    for k, v in r.items():
+                        if k == 'nombre':
+                            prov = Proveedor(r['nombre'], r['numero'])
 
             Producto(nombre_producto, cantidad, precio_entrada, precio_salida, prov)
     
 def exec_carga_existente():
 
     continuar = 1
-    proveedores = []
+    proveedores2 = []
 
     #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
@@ -44,19 +52,24 @@ def exec_carga_existente():
     for registro in productos:
         for key, value in registro.items():
             if key == 'proveedor':
-                if value in proveedores:
+                if value in proveedores2:
                     continue
                 else:
-                    proveedores.append(value)
+                    proveedores2.append(value)
 
     #seleccionar proveedor
     print("Seleccione el proveedor: ")
-    for i in range(len(proveedores)):
-        print(str(i)+" - "+proveedores[i])
+    for i in range(len(proveedores2)):
+        print(str(i)+" - "+proveedores2[i])
 
     proveedor_index = int(input("Opción: "))
-    proveedor_value = proveedores[proveedor_index]
-    proveedor = Proveedor(proveedor_value)
+    proveedor_value = proveedores2[proveedor_index]
+    num = 0
+    for r in proveedores:
+        for k, v in r.items():
+            if k == 'numero':
+               num = v
+    proveedor = Proveedor(proveedor_value, num)
     
     # 1. instanciar 'Producto' con nuevos valores 2. agregar dict a lista de productos
     while continuar == 1:
