@@ -40,3 +40,12 @@ def insert_proveedor(proveedores):
 
         for fila in proveedores:
             proveedor_writer.writerow(fila)
+
+def read_proveedor():
+    proveedores = []
+    with open(proveedores_file_path, newline='') as proveedores_csv:
+        proveedores_reader = csv.DictReader(proveedores_csv, delimiter=',')
+        for lines in proveedores_reader:
+            proveedores.append(lines)
+    
+    return proveedores
