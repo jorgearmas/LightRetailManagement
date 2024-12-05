@@ -44,7 +44,7 @@ while primera_ejecucion == 1:
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
     insert_producto(productos)
-    primera_ejecucion = int(input("Desea agregar otro producto de otro proveedor (1 > Si / 2 > No)? "))
+    primera_ejecucion = 2
 
 opcion_menu = 0
 
