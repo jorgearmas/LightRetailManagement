@@ -1,4 +1,5 @@
 id,nombre,cantidad,precio_entrada,precio_salida,proveedor
-1,Valvoline 20W40,10,350,400,LUCALZA
-2,Valvoline 10W30,15,330,395,LUCALZA
-13,Castrol Synt 70,10,50,110,LUCALZA
+1,Bucky,45,110,160,LUCALZA
+2,Thanos,30,90,145,LUCALZA
+13,Spot,15,1500,2200,LUCALZA
+14,Jazz,5,3500,4100,LUCALZA
