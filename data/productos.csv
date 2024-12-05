@@ -1,5 +1,6 @@
 id,nombre,cantidad,precio_entrada,precio_salida,proveedor
-1,Bucky,45,110,160,LUCALZA
-2,Thanos,30,90,145,LUCALZA
-13,Spot,15,1500,2200,LUCALZA
-14,Jazz,5,3500,4100,LUCALZA
+1,Bucky,200,80,150,LUCAZA
+2,Luxy,100,800,1300,LUCAZA
+3,Maxi,500,26,150,LUCAZA
+19,Bendix,100,150,200,DIN
+20,Balin,78,900,1900,DIN
