@@ -60,6 +60,6 @@ elif opcion_menu == 2:
     exec_carga_stock()
 elif opcion_menu == 3:
     exec_carga_no_existente()
-# elif opcion_menu == 4:
-#     exec_descarga()
+elif opcion_menu == 4:
+    exec_descarga()
     
