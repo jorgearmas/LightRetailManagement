@@ -1,6 +1,7 @@
 from data import insert_producto, read_producto, insert_proveedor, read_proveedor
 from proveedor import Proveedor
 from producto import Producto
+import os
 
 try:
     productos = read_producto()
@@ -38,7 +39,6 @@ def instanciar_productos(productos):
             Producto(nombre_producto, cantidad, precio_entrada, precio_salida, prov)
 
 def instanciar_proveedores(proveedores):
-    print(proveedores)
     nombre = ""
     numero = ""
     
@@ -98,6 +98,9 @@ def exec_carga_existente():
     
     #escribir lista en el archivo
     insert_producto(productos)
+    os.system('cls')
+    from menu import main_menu
+    main_menu()
 
 def exec_carga_stock():
 
@@ -113,16 +116,19 @@ def exec_carga_stock():
     for registro in productos:
         for key, value in registro.items():
             if key == 'id' and value == id_to_search:
-                print(f"Invetario actuaal de {registro['nombre']} -> {registro['cantidad']}")
+                print(f"Invetario actual de {registro['nombre']} -> {registro['cantidad']}")
                 cantidad_ingresada = int(input("- Numero de items a agregar: "))
                 nueva_cantidad = int(registro['cantidad']) + cantidad_ingresada
                 print(f"Nuevo invetario de {registro['nombre']} -> "+str(nueva_cantidad))
                 registro['cantidad'] = str(nueva_cantidad)
     
     insert_producto(productos)
+    input('Pulse enter para volver al menú')
+    os.system('cls')
+    from menu import main_menu
+    main_menu()
             
 def exec_carga_no_existente():
-    print(proveedores)
     #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
     #instanciar 'Proveedores' con proveedores existentes del diccionario 'proveedores'
@@ -142,7 +148,7 @@ def exec_carga_no_existente():
         'numero': proveedor.numero})
     
     insert_proveedor(proveedores)
-
+            
     while continuar == 1:
         
         print("-- Ingrese datos del producto --")
@@ -163,3 +169,7 @@ def exec_carga_no_existente():
         continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
     
     insert_producto(productos)
+    input('Pulse enter para volver al menú')
+    os.system('cls')
+    from menu import main_menu
+    main_menu()
