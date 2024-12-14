@@ -1,6 +1,4 @@
 from data import insert_producto, read_producto
-from proveedor import Proveedor
-from producto import Producto
 
 try:
     productos = read_producto()
@@ -20,5 +18,7 @@ def exec_descarga():
                     registro['cantidad'] = str(int(registro['cantidad']) - int(unidades_vendidas))
                     print(f"Nueva existencia de {registro['nombre']} ({registro['id']}) -> {registro['cantidad']} unidades")
         continuar = int(input("Desea continuar descargando (1 > Si / 2 > No)? "))
-    
+
     insert_producto(productos)
+    from menu import main_menu
+    main_menu()
