@@ -25,3 +25,8 @@ def main_menu():
             exec_carga_no_existente()
         elif opcion_menu == 4:
             exec_descarga()
+        elif opcion_menu == 5:
+            exit()
+        else:
+            print("Ingrese opción correcta")
+            opcion_menu = int(input("Ingrese opcion: "))
