@@ -3,15 +3,60 @@ from proveedor import Proveedor
 from producto import Producto
 import os
 
+def primera_carga():
+    proveedores = []
+    productos = []
+    continuar = 1
+    print("********** LIGHT RETAIL MANAGEMENT *********")
+    print("------------- PRIMERA EJECUCION ------------")
+    print("- Ingrese datos del proveedor del producto -")
+    nombre_proveedor = input("Nombre: ")
+    numero_proveedor = input("Teléfono: ")
+    proveedor = Proveedor(nombre_proveedor, numero_proveedor)
+    
+    proveedores.append({
+        'id': proveedor.id,
+        'nombre': proveedor.nombre,
+        'numero': proveedor.numero})
+    
+    insert_proveedor(proveedores)
+
+    while continuar == 1:  
+        print("-- Ingrese datos del producto --")
+        nombre_producto = input("Nombre: ")
+        cantidad = input("Cantidad: ")
+        precio_entrada = input("Precio de compra: ")
+        precio_salida = input("Precio de venta: ")
+
+        producto = Producto(nombre_producto, cantidad, precio_entrada, precio_salida, proveedor.nombre)
+        productos.append({
+            'id': producto.id, 
+            'nombre': producto.nombre, 
+            'cantidad': producto.cantidad, 
+            'precio_entrada': producto.precio_entrada, 
+            'precio_salida': producto.precio_salida, 
+            'proveedor': proveedor.nombre})
+
+        continuar = int(input("Desea agregar otro producto del mismo proveedor (1 > Si / 2 > No)? "))
+    
+    insert_producto(productos)
+    input("""
+        Configuracion inicial finalizada, el programa se cerrará.
+        Ejecute de nuevo el programa para acceder al menú principal.
+        -- Pulse ENTER para continuar --
+    """)
+    exit()
+    
+
 try:
     productos = read_producto()
 except FileNotFoundError:
-    print("Proceso archivo inicial stock")
+    primera_carga()
 
 try:
     proveedores = read_proveedor()
 except FileNotFoundError:
-    print("Proceso archivo inicial stock")
+    primera_carga()
 
 def instanciar_productos(productos):
     
@@ -129,6 +174,7 @@ def exec_carga_stock():
     main_menu()
             
 def exec_carga_no_existente():
+
     #instanciar 'Producto' con productos existentes del diccionario 'productos'
     instanciar_productos(productos)
     #instanciar 'Proveedores' con proveedores existentes del diccionario 'proveedores'
