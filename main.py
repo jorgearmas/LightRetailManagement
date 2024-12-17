@@ -1,6 +1,5 @@
 from proveedor import Proveedor
 from producto import Producto
-from data import insert_producto, insert_proveedor
 from menu import main_menu
 
 # primera_ejecucion = int(input("Es esta la primera ejecucion (1 > Si / 2 > No)? "))
@@ -43,7 +42,7 @@ from menu import main_menu
 #     insert_producto(productos)
 #     primera_ejecucion = 2
 
-main_menu()
+main_menu(0)
 
 
         
