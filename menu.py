@@ -1,6 +1,6 @@
 
 from carga import exec_carga_existente, exec_carga_no_existente, exec_carga_stock
-from descarga import exec_descarga
+from descarga import exec_descarga, exec_descarga_gral
 import os
 
 def main_menu(opcion_menu):
@@ -43,7 +43,7 @@ def menu_descarga(opcion_menu_descarga):
         if opcion_menu_descarga == 1:
             exec_descarga()
         elif opcion_menu_descarga == 2:
-            pass
+            exec_descarga_gral()
         elif opcion_menu_descarga == 3:
             os.system('cls')
             main_menu(0)
