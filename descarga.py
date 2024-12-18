@@ -30,13 +30,13 @@ def exec_descarga_gral():
     for i in range(len(productos)):
         print(f"{i} - {productos[i]}")
     item_a_descargar = int(input('Opción: '))     
-    
-    for i in range(len(productos)):
-        if i == item_a_descargar:
-            print(f"Descargando -> {productos[item_a_descargar]}")
-            for key, values in productos[item_a_descargar].items():
-                unidades_vendidas = input("- Ingrese unidades vendidas: ")
-                
+    print('Descargando item -> ')
+    print(productos[item_a_descargar])
+    unidades_vendidas = input("- Ingrese unidades vendidas: ")
+    productos[item_a_descargar]['cantidad'] = str(int(productos[item_a_descargar]['cantidad']) - int(unidades_vendidas))
+    print(f"Nueva existencia de {productos[item_a_descargar]['nombre']} ({productos[item_a_descargar]['id']}) -> {productos[item_a_descargar]['cantidad']} unidades")
+    input('Presione cualquier tecla para volver al menu anterior')
     os.system('cls')
-    from menu import main_menu
-    main_menu(0)
+    insert_producto(productos)
+    from menu import menu_descarga
+    menu_descarga(0)
